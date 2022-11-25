@@ -33,6 +33,7 @@ class DoublyLinkedList {
     //Add at end of list.
     void Add(int data);
     void Remove(int index);
+    void Reverse();
 
     int& operator[](int index);
 

@@ -35,8 +35,9 @@ void DoublyLinkedList::Add(int data) {
 }
 
 void DoublyLinkedList::Remove(int index) {
-  if (index < 0 && (index + 1) > _size) {
-    throw "Attempting to remove object out of bounds.";
+  if (index < 0 || (index + 1) > _size) {
+    std::string errorMsg = "Attempting to remove object out of bounds.";
+    throw errorMsg;
   }
 
   Node* node = _head;
@@ -63,9 +64,28 @@ void DoublyLinkedList::Remove(int index) {
   _size--;
 }
 
+void DoublyLinkedList::Reverse() {
+  if (_size == 0) {
+    return;
+  }
+
+  Node* node = _head;
+  while (node->next != 0) {
+    Node* temp = node->next;
+    node->next = node->previous;
+    node->previous = temp;
+    node = temp;
+  }
+  node->next = node->previous;
+  node->previous = 0;
+
+  _head = node;
+}
+
 int& DoublyLinkedList::operator[](int index) {
-  if (index < 0 && (index+1) > _size) {
-    throw "Attempting to access object out of bounds.";
+  if (index < 0 || (index+1) > _size) {
+    std::string errorMsg = "Attempting to access object out of bounds.";
+    throw errorMsg;
   }
   
   Node* node = _head;

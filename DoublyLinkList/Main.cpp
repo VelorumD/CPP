@@ -100,6 +100,27 @@ void test_Remove_remove_2_items_should_have_8_left() {
   delete list;
 }
 
+void test_Reverse_List() {
+  int size = 10;
+  DoublyLinkedList* list = createListWithNItems(size);
+  list->Reverse();
+  int expectedValue = size;
+  for (int i = 0; i < size; ++i)
+  {
+    if ((*list)[i] != expectedValue--) {
+      std::string errorMsg = "List is not reversed correctly";
+      delete list;
+      throw errorMsg;
+    }
+  }
+  delete list;
+}
+
+void test_Index_Out_Of_Bounds() {
+  DoublyLinkedList* list = new DoublyLinkedList();
+  list->Remove(5);
+}
+
 // MAIN
 int main()
 {
@@ -109,4 +130,6 @@ int main()
   runTest(test_Add_2_remove_first_Add_5_should_have_size_6, "Add 2 Remove first Add 5, should have size 6");
   runTest(test_Add_10_items_To_List, "Add 10 itesm to List");
   runTest(test_Remove_remove_2_items_should_have_8_left, "Remove 2 items from list, should size 8");
+  runTest(test_Reverse_List, "Reverse list");
+  runTest(test_Index_Out_Of_Bounds, "Index out of bounds");
 }
